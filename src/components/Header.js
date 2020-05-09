@@ -9,7 +9,7 @@ export default function Header(){
     }
     return(
        <View style={styles.header}>
-         <View style={{flex:4}}>
+         <View style={{flex:2}}>
            <TextInput style={{padding:10}}
            placeholder="Search..."
            />
