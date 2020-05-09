@@ -7,7 +7,7 @@ import Home from './Pages/Home'
 export default function Routes(){
     return(
       <NavigationContainer>
-         <AppStack.Navigator screenOptions={{headerShown:true}}>
+         <AppStack.Navigator screenOptions={{headerShown:false}}>
            <AppStack.Screen name ="Home" component={Home}/>
          </AppStack.Navigator>
       </NavigationContainer>
