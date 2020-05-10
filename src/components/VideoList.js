@@ -2,16 +2,11 @@ import React,{useEffect,useState} from 'react'
 import {View,Text,ScrollView,Image} from 'react-native'
 import api from '../Services/api'
 import { FlatList } from 'react-native-gesture-handler'
+import {useSelector} from 'react-redux'
 export default function VideoTList(){
-   const [stream,setStream]=useState([])
-   async function Search(){
-     const info = await api.get('https://api.twitch.tv/kraken/search/streams?query=dota2')
-     setStream(info.data.streams)
-     console.log(info.data)
-    }
-      useEffect(()=>{
-        Search()
-      },[])
+   
+   const stream = useSelector(state=> state.stream)
+   console.log(stream)
     return (
       <View style={{flexDirection:'column'}}>
         <FlatList
