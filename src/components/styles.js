@@ -1,5 +1,5 @@
 import {StyleSheet,Dimensions} from 'react-native'
-const{width}= Dimensions.get('window')
+const{width,height}= Dimensions.get('window')
 export default StyleSheet.create({
     header:{
         marginVertical:10,
@@ -25,5 +25,30 @@ export default StyleSheet.create({
         color:'white',
         justifyContent:'flex-end',
         fontWeight:'500'
+    },
+    containerFlatList:{
+        marginBottom:50
+    },
+    VideoCards:{
+        backgroundColor:'#fff',
+        borderRadius:10,
+        marginTop:15,
+        width:width,
+        height:height*0.14
+    },
+    containerText:{
+        marginLeft:18
+    },
+    nameGame:{
+        fontSize:18,
+        fontWeight:'200'
+    },
+    videoInfo:{
+        fontSize:16,
+        fontWeight:'200'
+    },
+    thumbImage:{
+        alignItems:'flex-end',
+        flex:1
     }
 })

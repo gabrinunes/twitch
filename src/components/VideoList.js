@@ -4,37 +4,42 @@ import api from '../Services/api'
 import { FlatList } from 'react-native-gesture-handler'
 import {useSelector} from 'react-redux'
 import {useNavigation} from '@react-navigation/native'
+import Spinner from 'react-native-loading-spinner-overlay'
+import styles from './styles'
 export default function VideoTList(){
    
    const stream = useSelector(state=> state.stream)
+   const loading = useSelector(state=> state.loading)
    const navigation = useNavigation()
    function NavigateToDetailVideo(videoDetail){
      navigation.navigate('DetailVideo',{videoDetail})
    }
     return (
       <View style={{flexDirection:'column'}}>
+        <Spinner
+        visible={loading}
+        />
         <FlatList
-         style={{marginBottom:10}}
+         style={styles.containerFlatList}
          data={stream}
          keyExtractor={streams=>String(streams._id)}
          onEndReachedThreshold={0.2}
          renderItem={({item:streams})=>(
-              <View style={{backgroundColor:'#fff'}}>
-             <View style={{marginRight:250,marginLeft:18}}>
-         <Text>{streams.game}</Text>
-         <Text>{streams.viewers}</Text>
+             <TouchableOpacity onPress={()=>NavigateToDetailVideo(streams)}>
+                <View style={styles.VideoCards}>
+             <View style={styles.containerText}>
+         <Text style={styles.nameGame}>{streams.game}</Text>
+         <Text style={styles.videoInfo}>Views:{streams.viewers}</Text>
+         <Text style={styles.videoInfo}>Views:{streams.viewers}</Text>
             </View>
-            <TouchableOpacity
-            
-            onPress={()=> NavigateToDetailVideo(streams)}>
-            <View style={{alignItems:'flex-end'}}>
+            <View style={styles.thumbImage}>
               <Image
               source={{uri:streams.preview.medium}}
-              style={{width:150,height:100,bottom:40,marginRight:10}}
+              style={{width:100,height:80,bottom:67,marginRight:10}}
               />
             </View>
-            </TouchableOpacity>
-           </View>
+           </View> 
+             </TouchableOpacity>
          )}
         />
       </View>

@@ -1,5 +1,5 @@
 import React ,{useState} from 'react'
-import {View,Text,TextInput,Button,TouchableOpacity} from 'react-native'
+import {View,Text,TextInput,TouchableOpacity} from 'react-native'
 import styles from './styles'
 import api from '../Services/api'
 import action from '../store/action'
@@ -8,8 +8,10 @@ export default function Header(){
     const dispatch = useDispatch()
     const [text,setText]=useState('')
    async function Search(value){
+      dispatch(action.setLoading(true))
       const info = await api.get(`https://api.twitch.tv/kraken/search/streams?query=${value}`)
       dispatch(action.setStream(info.data.streams))
+      dispatch(action.setLoading(false))
     }
 
     return(
