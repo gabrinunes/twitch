@@ -40,12 +40,15 @@ export default StyleSheet.create({
         marginLeft:18
     },
     nameGame:{
-        fontSize:18,
-        fontWeight:'200'
+        fontSize:15,
+        fontWeight:'500',
+        color:'#6441a5'
     },
     videoInfo:{
-        fontSize:16,
-        fontWeight:'200'
+        fontSize:14,
+        fontWeight:'200',
+        color:'#6441a5',
+        marginTop:3
     },
     thumbImage:{
         alignItems:'flex-end',
