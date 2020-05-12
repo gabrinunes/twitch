@@ -9,7 +9,7 @@ export default function Header(){
     const [text,setText]=useState('')
    async function Search(value){
       dispatch(action.setLoading(true))
-      const info = await api.get(`https://api.twitch.tv/kraken/search/streams?query=${value}`)
+      const info = await api.get(`https://api.twitch.tv/kraken/search/streams?query=${value}&limit=30`)
       dispatch(action.setStream(info.data.streams))
       dispatch(action.setLoading(false))
     }

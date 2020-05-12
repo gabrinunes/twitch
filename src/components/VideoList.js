@@ -30,12 +30,12 @@ export default function VideoTList(){
              <View style={styles.containerText}>
          <Text style={styles.nameGame}>{streams.game}</Text>
          <Text style={styles.videoInfo}>Views:{streams.viewers}</Text>
-         <Text style={styles.videoInfo}>Views:{streams.viewers}</Text>
+         <Text style={styles.videoInfo}>Channel:{streams.channel.display_name}</Text>
             </View>
             <View style={styles.thumbImage}>
               <Image
               source={{uri:streams.preview.medium}}
-              style={{width:100,height:80,bottom:67,marginRight:10}}
+              style={{width:100,height:80,bottom:64,marginRight:10}}
               />
             </View>
            </View> 
