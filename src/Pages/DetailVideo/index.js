@@ -9,7 +9,7 @@ export default function DetailVideo(){
     const video = route.params.videoDetail
     const [loading,Setloading]=useState(true)
     function load(){
-        Setloading(false)
+        setTimeout(()=> Setloading(false),2000)
     }
     return(
         <View style={styles.container}>
