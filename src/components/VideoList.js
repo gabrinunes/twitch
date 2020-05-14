@@ -22,6 +22,7 @@ export default function VideoTList(){
         <FlatList
          style={styles.containerFlatList}
          data={stream}
+         keyboardShouldPersistTaps='always'
          keyExtractor={streams=>String(streams._id)}
          onEndReachedThreshold={0.2}
          renderItem={({item:streams})=>(
