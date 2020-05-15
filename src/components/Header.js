@@ -16,7 +16,7 @@ export default function Header(){
     }
 
     async function HomeInit(){
-      const info = await api.get('https://api.twitch.tv/kraken/search/streams?query=overwatch&limit=30')
+      const info = await api.get(`https://api.twitch.tv/kraken/streams`)
       dispatch(action.setStream(info.data.streams))
     }
     
