@@ -9,17 +9,25 @@ export default function Header(){
     const [text,setText]=useState('')
 
    async function Search(value){
+      try {
       dispatch(action.setLoading(true))
-      const info = await api.get(`https://api.twitch.tv/kraken/search/streams?query=${value}&limit=30`)
+      const info = await api.get(`https://api.twitch.tv/kraken/search/streams?query=${value}&limit=30`)  
       dispatch(action.setStream(info.data.streams))
-      dispatch(action.setLoading(false))
+      dispatch(action.setLoading(false)) 
+      } catch (error) {
+        console.log(error)
+        dispatch(action.setLoading(false)) 
+      }
     }
 
     async function HomeInit(){
+      try {
       const info = await api.get(`https://api.twitch.tv/kraken/streams`)
       dispatch(action.setStream(info.data.streams))
+      } catch (error) {
+        console.log(error)
+      }
     }
-    
     useEffect(()=>{
       HomeInit()
     },[])
