@@ -3,6 +3,7 @@ import {View,Text,TextInput,TouchableOpacity,Alert} from 'react-native'
 import styles from './styles'
 import api from '../Services/api'
 import action from '../store/action'
+import message from '../utils/alert'
 import {useDispatch} from 'react-redux'
 export default function Header(){
     const dispatch = useDispatch()
@@ -14,7 +15,7 @@ export default function Header(){
       const info = await api.get(`https://api.twitch.tv/kraken/search/streams?query=${value}&limit=30`)
 
       if (info.data.streams=='') {
-          alertSearch()
+          message.alertSearch()
           dispatch(action.setLoading(false))
 
       }else{
@@ -25,10 +26,10 @@ export default function Header(){
       } catch (error) {
         console.log(error)
         dispatch(action.setLoading(false))
+        message.alertSearchConection()
       }
     }
-
-
+    
     function alert(){
       Alert.alert(
         "Sem internet",
@@ -39,24 +40,13 @@ export default function Header(){
         {cancelable:true}
       )
     }
-    
-    function alertSearch(){
-      Alert.alert(
-        "Não retornou streams para esta pesquisa",
-        "Por favor tente outra vez",
-        [
-          {text:"OK"}
-        ],
-        {cancelable:true}
-      )
-    }
 
     async function HomeInit(){
       try {
       const info = await api.get(`https://api.twitch.tv/kraken/streams`)
       dispatch(action.setStream(info.data.streams))
       } catch (error) {
-        alert() 
+        alert()
         console.log(error)
       }
     }
