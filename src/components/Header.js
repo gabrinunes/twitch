@@ -1,5 +1,5 @@
 import React ,{useState,useEffect} from 'react'
-import {View,Text,TextInput,TouchableOpacity} from 'react-native'
+import {View,Text,TextInput,TouchableOpacity,Alert} from 'react-native'
 import styles from './styles'
 import api from '../Services/api'
 import action from '../store/action'
@@ -11,13 +11,44 @@ export default function Header(){
    async function Search(value){
       try {
       dispatch(action.setLoading(true))
-      const info = await api.get(`https://api.twitch.tv/kraken/search/streams?query=${value}&limit=30`)  
-      dispatch(action.setStream(info.data.streams))
-      dispatch(action.setLoading(false)) 
+      const info = await api.get(`https://api.twitch.tv/kraken/search/streams?query=${value}&limit=30`)
+
+      if (info.data.streams=='') {
+          alertSearch()
+          dispatch(action.setLoading(false))
+
+      }else{
+        dispatch(action.setStream(info.data.streams))
+        dispatch(action.setLoading(false))
+      } 
+
       } catch (error) {
         console.log(error)
-        dispatch(action.setLoading(false)) 
+        dispatch(action.setLoading(false))
       }
+    }
+
+
+    function alert(){
+      Alert.alert(
+        "Sem internet",
+        "Por favor verifique sua conexão",
+        [
+          {text:"OK",onPress:()=> HomeInit()}
+        ],
+        {cancelable:true}
+      )
+    }
+    
+    function alertSearch(){
+      Alert.alert(
+        "Não retornou streams para esta pesquisa",
+        "Por favor tente outra vez",
+        [
+          {text:"OK"}
+        ],
+        {cancelable:true}
+      )
     }
 
     async function HomeInit(){
@@ -25,6 +56,7 @@ export default function Header(){
       const info = await api.get(`https://api.twitch.tv/kraken/streams`)
       dispatch(action.setStream(info.data.streams))
       } catch (error) {
+        alert() 
         console.log(error)
       }
     }
